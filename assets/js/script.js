@@ -1,8 +1,11 @@
 var posts = [
     [2017, [
-        ["May 04", "The First post", "the-first-post"],
-        ["Nov 11", "Rust MessageBox", "rust-messagebox"]
-    ]]
+        ["May 04th", "The First post", "the-first-post"],
+        ["Nov 11th", "Rust MessageBox", "rust-messagebox"]
+    ]],
+    [2018, [
+        ["Jul 1st", "'Chơi' Lua trong 30 phút!", "lua-in-30min"]
+    ]],
 ];
 
 window.onload = function() {
