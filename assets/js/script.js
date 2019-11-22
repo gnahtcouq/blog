@@ -38,7 +38,9 @@ window.onload = function() {
                             match = unencode(match);
                             var g = parse_code(match);
                             var code = "", isNew = (g.before || g.after);
-                            var lang = left.match(/<pre><code class="(\w+)\s?/)[1];
+                            var lang = left.match(/<pre><code class="(\w+)/);
+                            
+                            lang = lang ? lang[1] : "plaintext";
                             
                             if (g.before) {
                                 code += gen_elm("pre", "insert-before", g.before);
