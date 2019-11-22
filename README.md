@@ -6,6 +6,20 @@
 - Static, fully frontend
 - Supports markdown content 
 
+### news
+![](https://i.imgur.com/cj1hPey.png)
+
+````md
+```c
+>main.c                             # file name     (one start with '>')
+<in {main}()                        # comment       (lines start with '<')
+[int main() {                       # before        (lines start with '[')
+    printf("Hello, world!\n");      # new insert
+    return 0;
+]}                                  # after         (lines start with ']')
+```
+````
+
 ### used
 - [showdown.js](http://showdownjs.com/) :: building markdown contents
 - [highlight.js](https://highlightjs.org/) :: code highlighting
