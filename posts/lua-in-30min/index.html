@@ -79,7 +79,7 @@ Ngôn ngữ lập trình kịch bản bậc cao với các đặc điểm: kiể
 
 # Cài đặt Lua
 
-Lua không kén thằng C compiler nào cả, hỗ trợ trên nhiều kiến trúc khác nhau nữa. Phiên bản mới nhất là 5.3.5, nhưng ổn định nhất và được sử dụng nhiều vẫn là 5.1.5.
+Lua không kén thằng C compiler nào cả, hỗ trợ trên nhiều kiến trúc khác nhau nữa. Phiên bản release mới nhất là 5.3.5, nhưng ổn định nhất và được sử dụng nhiều vẫn là 5.1.5.
 
 ```bash
 >Lua 5.1.5
@@ -90,11 +90,15 @@ $ cd lua-5.1.5
 $ make && make install
 ```
 
-Đối với Windows, ta có thể sử dụng [Lua Studio](https://github.com/rjpcomputing/luaforwindows/releases).
+### Chọn editor
 
-Lua có một package manager tên là [LuaRocks](https://luarocks.org/), tựa tựa như **vcpkg**, **conan**.
+Muốn đa nền tảng thì cứ quất **Sublime Text**, có một số package hỗ trợ autocomplete và cả just-in-time syntax checker. **VS Code** cũng ngon (có nhiều extension hỗ trợ Lua và cả debug).
 
-Khi đã setup xong, ta chỉ cần một editor bất kỳ là có thể code dễ dàng. Dùng Sublime Text là một lựa chọn tốt nhất.
+Ngoài ra còn có một IDE được viết hoàn toàn bằng Lua (sử dụng **wxWidget UI**) vô cùng nhanh và nhẹ, đó là [ZeroBrane Studio](https://studio.zerobrane.com/), nó hỗ trợ chủ yếu là code Lua và các game engine có Lua built-in, có live-coding khá ngon.
+
+Trên Windows, ta có thể sử dụng [Lua Studio](https://github.com/rjpcomputing/luaforwindows/releases), trọn gói cài đặt chỉ bằng giao diện.
+
+Lua có một package manager tên là [LuaRocks](https://luarocks.org/), tựa tựa như **vcpkg**, **conan**... hỗ trợ cài đặt các thư viện ngoài nhanh chóng.
 
 # Hello Lua
 
