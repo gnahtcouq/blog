@@ -22,6 +22,7 @@ window.onload = function() {
         });
     }
     else if (lp.indexOf('/posts/') != -1) {
+        
         showdown.extension('my_codehl', function() {
             var unencode = function(text) {
                 return text.replace(/&amp;/g, '&')
