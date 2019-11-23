@@ -553,9 +553,10 @@ local mod = require('module')
 --   require('folder.module')
 --   có thể thay '.' thành '/' hoặc '\\'
 
-print(mod.a) -- > 1
-print(mod.b) -- > true
-mod.foo() -- > 'Hello'
+print(mod.a)    -- > 1
+print(mod.b)    -- > true
+mod:foo()       -- > 'Hello'
+-- Hoặc mod.foo(mod).
 ```
 
 Nên nhớ, biến `local` trong __main.lua__ sẽ không dùng được trong __module.lua__.
@@ -584,22 +585,22 @@ local f = loadfile('abc.lua')
 
 ### Các module chuẩn
 
-Lua cung cấp một số module chuẩn dành cho các nhu cầu cơ bản, tất nhiên là không cần dùng __require__ đâu, trừ khi biến của thư viện được bạn gán cho một giá trị nào đó.
+Lua cung cấp một số module chuẩn dành cho các nhu cầu cơ bản, tất nhiên là không cần dùng `require` đâu, trừ khi biến của thư viện được bạn gán cho một giá trị nào đó.
+
+- [io](http://lua-users.org/wiki/IoLibraryTutorial)
+- [math](http://lua-users.org/wiki/MathLibraryTutorial)
+- [os](http://lua-users.org/wiki/OsLibraryTutorial)
+- [string](http://lua-users.org/wiki/StringLibraryTutorial)
+- [table](http://lua-users.org/wiki/TableLibraryTutorial)
 
 ```lua
 io.write("Hello\n") -- Tương tự print().
 os.exit()           -- Thoát nhanh.
 ```
 
-- [string library](http://lua-users.org/wiki/StringLibraryTutorial)
-- [table library](http://lua-users.org/wiki/TableLibraryTutorial)
-- [math library](http://lua-users.org/wiki/MathLibraryTutorial)
-- [io library](http://lua-users.org/wiki/IoLibraryTutorial)
-- [os library](http://lua-users.org/wiki/OsLibraryTutorial)
-
 ## 9. Lập trình coroutines
 
-Coroutine không phải là lập trình đa luồng, nhưng nó lại mang nghĩa đồng thời (concurrency, chỉ nghĩa bóng). Khác nhau ở đây, là sự hợp tác giữa các coroutine, và một lúc chỉ chạy được một coroutine; chúng có thể được yêu cầu dừng để coroutine khác chạy xen vào.
+Một coroutine mang nghĩa một luồng (thread), lập trình coroutines cũng mang nghĩa lập trình đồng thời (concurrency, nhưng chỉ là nghĩa bóng). Khác nhau ở đây là nghĩa đen, là sự hợp tác (chứ không phải đồng thời) giữa các coroutine, và một lúc chỉ chạy được một coroutine, chúng có thể được yêu cầu dừng để coroutine khác chạy xen vào.
 
 ```
 >concurrency
