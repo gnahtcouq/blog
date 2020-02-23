@@ -286,11 +286,23 @@
 }
 
 body {
-    background-color: #fff;
     padding: 50px;
     font: 14px/1.5 monospace /*"Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif*/;
     color: #727272;
     font-weight: 400
+}
+
+body::after {
+    content: "";
+    background-image: url('https://www.transparenttextures.com/patterns/light-wool.png');
+    background-color: #fff;
+    opacity: 0.75;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
 }
 
 nav {
@@ -543,6 +555,18 @@ a.next {
 
 a.next:after {
     content: " >"
+}
+
+.c {
+    text-align: center;
+}
+
+.l {
+    text-align: left;
+}
+
+.r {
+    text-align: right;
 }
 
 #list-post > h2 {
