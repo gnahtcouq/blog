@@ -584,12 +584,16 @@ a.next:after {
     display: none;
 }
 
-#post-title {
+.post-title {
     margin-bottom: 5px;
 }
 
-#post-date {
+.post-date {
     font-style: italic;
+}
+
+.post-toc p {
+    margin: 0;
 }
 
 .post-content {

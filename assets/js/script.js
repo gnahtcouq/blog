@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function()
         const path = lp.replace('/posts/', '')
             .replace('/index.html', '').replace('/', '');
         const post = get_post(posts, path);
-        header.innerHTML += `<h2 id="post-title">${post.title}</h2>` +
-            `<p id="post-date">${post.date}</p>`;
+        header.innerHTML += `<h2 class="post-title">${post.title}</h2>` +
+            `<p class="post-date">${post.date}</p>`;
         
-        showdown.extension('my_codehl', function() {
+        showdown.extension('code.hl', function() {
             var unencode = function(text) {
                 return text.replace(/&amp;/g, '&')
                     .replace(/&lt;/g, '<')
@@ -127,10 +127,31 @@ document.addEventListener('DOMContentLoaded', function()
                 }
             }];
         });
+
+        const toc = create_elm('div', 'post-toc');
+
+        showdown.extension('t.o.c', function() {
+            return [{
+                type: 'output',
+                filter: function(text, converter, options) {
+                    var left  = '<(h1|h2)\\s*id=(\"|\')',
+                        right = '(\"|\')\\s*>',
+                        flags = 'g',
+                        replacement = function(wholeMatch, match, left, right) {
+                            toc.innerHTML += `<p><a href="#${match}">#${match}</a></p>`;
+                            return wholeMatch;
+                        };
+                    return showdown.helper
+                        .replaceRecursiveRegExp(text, replacement, left, right, flags);
+                }
+            }];
+        });
+
+        header.appendChild(toc);
         
         showdown.setFlavor('github');
         var converter = new showdown
-            .Converter({ openLinksInNewWindow: true, extensions: ['my_codehl']});
+            .Converter({ openLinksInNewWindow: true, extensions: ['code.hl', 't.o.c']});
         
         var html = read_file((window.location.href)
             .replace('/index.html', '') + '/index.html');
