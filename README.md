@@ -1,5 +1,7 @@
 ## blog
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L6W74V)
+
 ### features
 - For personal blog or documentation
 - Static, fully frontend
