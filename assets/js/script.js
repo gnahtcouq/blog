@@ -8,20 +8,27 @@ const navs = [
     {'@me': 'mailto:wuuyi123@gmail.com'}
 ];
 
-const posts = [
-    [2017, [
-        ['04 thg 05', 'The First post', 'the-first-post'],
-        ['11 thg 11', 'Rust MessageBox', 'rust-messagebox']
-    ]],
-    [2018, [
-        ['01 thg 07', '\'Chơi\' Lua trong 30 phút!',
-            'lua-in-30min']
-    ]],
-    [2020, [
-        ['23 thg 02', 'Pick-lock tướng tốc độ bàn thờ',
-            'super-fast-pick-lock']
-    ]]
-];
+const posts = {
+    2017: [{
+            date:  '4 thg 5',
+            title: 'The First post',
+            link:  'the-first-post'
+        }, {
+            date:  '11 thg 11',
+            title: 'Rust MessageBox',
+            link:  'rust-messagebox'
+        }],
+    2018: [{
+            date:  '1 thg 7',
+            title: '\'Chơi\' Lua trong 30 phút!',
+            link:  'lua-in-30min'
+        }],
+    2020: [{
+            date:  '23 thg 2',
+            title: 'Pick-lock tướng <br>tốc độ bàn thờ',
+            link:  'super-fast-pick-lock'
+        }]
+};
 
 document.addEventListener('DOMContentLoaded', function()
 {
@@ -35,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
+    const section = document.querySelector('section');
 
     header.innerHTML += `<h1>${title}</h1><nav>` + snav + '</nav>';
     footer.innerHTML += `<p>&#169; ${(new Date).getFullYear()} ${author} &#124; ` +
@@ -45,24 +53,29 @@ document.addEventListener('DOMContentLoaded', function()
     const lp = window.location.pathname;
     if (lp == '/' || lp == '/index.html')
     {
-        const list = document.getElementById('list-post');
-        posts.reverse();
-        posts.forEach(function(a) {
-            var s = '';
-            list.innerHTML += gen_elm('h2', null, a[0]);
-            a[1].reverse();
-            a[1].forEach(function(b) {   
-                s += `<p><i>${b[0]}</i><a href="/posts/${b[2]}">${b[1]}</a></p>`;
+        const h1 = create_elm('h1', '', 'posts');
+        const list = create_elm('div', 'list-post');
+
+        Object.keys(posts).reverse().forEach(function(year) {
+            var inner = '';
+            list.innerHTML += gen_elm('h2', null, year);
+            posts[year].reverse().forEach(function(details) {
+                const {date, title, link} = details;
+                inner += `<p><a href="/posts/${link}">${title}</a><i>${date}</i></p>`;
             });
-            list.innerHTML += gen_elm('ul', null, s);
+            list.innerHTML += gen_elm('ul', null, inner);
         });
+
+        section.appendChild(h1);
+        section.appendChild(list);
     }
     else if (lp.indexOf('/posts/') != -1)
     {
         const path = lp.replace('/posts/', '')
             .replace('/index.html', '').replace('/', '');
-        header.innerHTML += `<h2 id="post-title">${get_title(path)}</h2>` +
-            `<p id="post-date">${get_date(path)}</p>`;
+        const post = get_post(posts, path);
+        header.innerHTML += `<h2 id="post-title">${post.title}</h2>` +
+            `<p id="post-date">${post.date}</p>`;
         
         showdown.extension('my_codehl', function() {
             var unencode = function(text) {
@@ -105,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function()
                                 code += gen_elm('pre', 'insert-after', g.after);
                             }
                             
-                            return gen_elm('div', 'codehilite', code)
-                                + (g.file ? gen_elm('div', 'source-file-narrow',
+                            return gen_elm('div', 'codehilite', code) +
+                                (g.file ? gen_elm('div', 'source-file-narrow',
                                     g.file + (g.comment ? ', ' + g.comment : '')) : '');
                         };
                     return showdown.helper
@@ -122,12 +135,19 @@ document.addEventListener('DOMContentLoaded', function()
         var html = read_file((window.location.href)
             .replace('/index.html', '') + '/index.html');
         var content = get_content(html);
-        document.getElementById('post-content')
-            .innerHTML = converter.makeHtml(content);
+        section.className = 'post-content';
+        section.innerHTML = converter.makeHtml(content);
     }
     
     fix_scale(document);
 });
+
+function create_elm(tag = '', klass = '', inner = '') {
+    const elm = document.createElement(tag);
+    elm.className = klass;
+    elm.innerHTML = inner;
+    return elm;
+}
 
 function gen_elm(tag, klass, inner) {
     return `<${tag} ${klass ?
@@ -135,35 +155,21 @@ function gen_elm(tag, klass, inner) {
 }
 
 function simple_bold(s) {
-    return s
-        .replace('{', '<em>')
-        .replace('}', '</em>');
+    return s.replace(/{/g, '<em>')
+        .replace(/}/g, '</em>');
 }
 
-function get_title(path) {
-    var ret = '';
-    posts.forEach(function(a) {
-        a[1].forEach(function(b) {
-           if (b[2] == path)
-               ret = b[1];
-        });
-    });
-    return ret;
+function get_post(posts, path) {
+    for (var k in posts) {
+        var l = posts[k];
+        for (var i = 0; i < l.length; i++)
+            if (l[i].link === path)
+                return l[i];
+    }
 }
 
-function get_date(path) {
-    var ret = '';
-    posts.forEach(function(a) {
-        a[1].forEach(function(b) {
-           if (b[2] == path)
-               ret = b[0] + ' ' + a[0];
-        });
-    });
-    return ret;
-}
-
-function get_content(str) {
-    return str.split('<!--content>').pop()
+function get_content(s) {
+    return s.split('<!--content>').pop()
         .split('</content-->').shift();
 }
 

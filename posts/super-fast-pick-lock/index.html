@@ -17,7 +17,7 @@
     <div class="wrapper">
         <header>
         </header>
-        <section id="post-content">
+        <section>
         </section>
         <footer>
         </footer>
@@ -35,12 +35,12 @@ Thấy trên giang hồ dạo này xuất hiện khá nhiều yêu cầu về to
 <img src='https://i.ytimg.com/vi/GHnoNzH3g2M/maxresdefault.jpg' height='280px'>
 </p>
 
-Bài toán đặt ra như tiêu đề thôi, nhưng nó khá là dễ nên tại hạ rắc thêm một ít muối vào, và nó trở thành: **tự động chấp nhận trận đấu và pick-lock tướng siêu nhanh chỉ bằng trình duyệt web!**
+Bài toán của chúng ta không đơn thuần như tiêu đề: **tự động chấp nhận trận đấu và pick-lock tướng siêu nhanh chỉ bằng trình duyệt web!**
 
-Nhìn thanh scrollbar đi, nếu các vị đây không muốn dài dòng hay thậm chí là chỉ muốn đạt được **thành quả** thì có thể nhảy thẳng đến phần [**Thực hiện**](#thực-hiện) ngay và luôn nhé.
+Nhìn scrollbar đi, nếu các vị đây không muốn dài dòng hay thậm chí là chỉ muốn đạt được **thành quả** thì có thể nhảy thẳng đến phần [**Thực hiện**](#thực-hiện) ngay và luôn nhé.
 
 ## NGÂM CỨU
-Trong quyển **Binh Pháp** của **Tôn Tử** có câu 😎
+Trong quyển **Binh Pháp** của **Tôn Tử** có câu:
 <p align='center'>
 <img src='https://www.elleman.vn/wp-content/uploads/2019/08/06/binhphaptontu-ELLEMan-Feature.jpg' height='300px'>
 <br>
@@ -51,7 +51,7 @@ Trong quyển **Binh Pháp** của **Tôn Tử** có câu 😎
 
 ### League Client truyện
 
-Khoảng giữa năm 2016 thì Riot bắt đầu tung ra bản alpha của client mới, mang đến một giao diện hoàn toàn mới được gọi là **Hextech UI**. Từ Hextech đã xuất hiện trước đó khá lâu, trong một số skin, báu vật và cả cốt truyện game... và gần như là độc quyền của **Riot**.
+Khoảng giữa năm 2016 thì **Riot** bắt đầu tung ra bản alpha của client mới, mang đến một giao diện hoàn toàn mới được gọi là **Hextech UI**. Từ Hextech đã xuất hiện trước đó khá lâu, trong một số skin, báu vật và cả cốt truyện game... và gần như là độc quyền của **Riot**.
 
 Đây là 2 bài viết mà Riot cố tình tiết lộ về các công nghệ được sử dụng trong client mới:
 - [The Architecture of the League Client Update](https://technology.riotgames.com/news/architecture-league-client-update)
@@ -67,17 +67,17 @@ Sau đấy Riot nhận thấy rằng **AIR** đã dần lỗi thời và **LCO**
 
 <p align="center">
     <img src="https://technology.riotgames.com/sites/default/files/lcu_htmljs_in.png" height="300px"/>
-</p
+</p>
 
 Lúc đó, **JavaScript** như là một ông trùm và đứng sau là **node.js**. Nhưng Riot không muốn phụ thuộc vào **node.js** mà là xây dựng nền tảng riêng tương tự, thế là họ đưa ra lựa chọn dị theo concept cũ: vẫn sử dụng **RTMP** kèm bộ xử lý responses bất đồng bộ, thay vào đó là xây dựng UI bằng **CEF**.
 
 <p align="center">
     <img src="https://technology.riotgames.com/sites/default/files/lcu_architecture_1.png" height="300px"/>
-</p
+</p>
 
 [**CEF**](https://en.wikipedia.org/wiki/Chromium_Embedded_Framework) là viết tắt của **Chromium Embedded Framework**, một C++ framework hỗ trợ nhúng bộ vi xử lý của trình duyệt **Chromium** vào ứng dụng desktop. Project này được viết từ source của nhân Chromium và gần như tận dụng mọi thứ từ nó.
 
-> node.js thực sự chậm, Riot không muốn viết mọi thứ bằng JavaScript.
+> Riot chê node.js chậm và không muốn viết mọi thứ bằng JavaScript.
 
 #### Microservices
 
@@ -85,7 +85,7 @@ Lúc đó, **JavaScript** như là một ông trùm và đứng sau là **node.j
 
 <p align="center">
     <img src="https://technology.riotgames.com/sites/default/files/lcu_architecture_2.png" height="300px"/>
-</p
+</p>
 
 Chẳng hạn, khi bạn click vào xem tướng (Bộ sưu tập > Tướng), UI sẽ gửi một request đến **microservices**. Trong lúc chờ phản hồi, UI sẽ hiển thị một loader thay thế. Nếu respone thành công, server trả về dữ liệu dạng JSON chứa thông tin tướng đã sở hữu, tướng miễn phí, giá cả... và UI chỉ cần xử lý liệu đó để kết xuất thành giao diện rồi hiển thị cho bạn xem.
 
@@ -228,7 +228,7 @@ https://127.0.0.1:PORT/lol-champions/v1/owned-champions-minimal
 
 Sau đó, có một hộp thoại yêu cầu đăng nhập hiện ra:
 <p align="center">
-    <img src="https://i.imgur.com/IOhzmYe.png">
+    <img src="./login.png">
 </p>
 
 Phần tên người dùng cứ để là **riot**, còn mật khẩu thì nhập đoạn pass lúc nãy vào. Nếu đăng nhập thành công, trình duyệt sẽ hiện ra một đoạn JSON dài sòng sọc như sau:
@@ -268,19 +268,26 @@ var request = async (method, url, body = undefined) => {
 
 Hàm kiểm tra có phải đang chờ chấp nhận trận đấu:
 ```js
+> console
+< Khi tìm thấy trận, thuộc tính {state} sẽ mang giá trị là {InProgress}.
+[
 var isInProgress = async () => (await request(
     'GET', '/lol-matchmaking/v1/ready-check')).state === 'InProgress';
 ```
-- Khi tìm thấy trận, thuộc tính `state` sẽ mang giá trị là `InProgress`.
 
 Hàm chấp nhận trận đấu:
 ```js
+> console
+[
 var acceptMatch = async () => await request(
     'POST', '/lol-matchmaking/v1/ready-check/accept');
 ```
 
 Hàm lấy action ID:
 ```js
+> console
+< Trả về -1 nếu không phải đang chọn tướng. Dùng {filter} để lọc ra {id} của chính mình.
+[
 var getActionId = async () => {
     var {localPlayerCellId, actions} =
         await request('GET', '/lol-champ-select/v1/session');
@@ -289,11 +296,11 @@ var getActionId = async () => {
         v.actorCellId === localPlayerCellId)[0].id;
 };
 ```
-- Nếu không đang trong quá trình chọn tướng, trả về -1.
-- Dùng `filter` để lọc ra `id` của chính mình.
 
 Hàm `pick` và hàm `lock`:
 ```js
+> console
+[
 var pick = async (id, championId) => Object.keys(await request(
     'PATCH', `/lol-champ-select/v1/session/actions/${id}`,
     JSON.stringify({championId}))).length === 0;
@@ -302,10 +309,13 @@ var lock = async (id) => await request(
     'POST', `/lol-champ-select/v1/session/actions/${id}/complete`);
 ```
 - Tham số `id` lấy từ hàm `getActionId`.
-- Khi chọn tướng thành công thì ta được đoạn JSON rỗng, nếu lỗi (do có người chọn rồi hay gì đó) thì ngược lại.
+- Khi chọn tướng thành công thì ta được đoạn JSON rỗng.
 
 Và cuối cùng là hàm auto chấp nhận trận dấu và pick-lock:
 ```js
+> console
+< Khi khóa tướng xong sẽ dừng auto.
+[
 var start = (championIds = [157]) => {
     var inv = setInterval(async () => {
         var id;
@@ -322,7 +332,6 @@ var start = (championIds = [157]) => {
 ```
 - Tham số `championIds` là mảng ID tướng, phòng trường hợp có người chọn tướng đó trước bạn, mặc định là **Yasuo**.
 - Dùng `setInterval` để check liên tục, vì ta không có event nào cả.
-- Khi khóa tướng sẽ dừng auto.
 
 ### Test
 

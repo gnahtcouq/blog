@@ -1,9 +1,6 @@
 @import url("normalize.css");
 @import url("hybrid.css");
-
-* {
-    transition: all 1s ease;
-}
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree:400,400i,700,700i&display=swap&subset=vietnamese');
 
 .highlight table td {
     padding: 5px
@@ -287,9 +284,9 @@
 
 body {
     padding: 50px;
-    font: 14px/1.5 monospace /*"Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif*/;
-    color: #727272;
-    font-weight: 400
+    color: #000;
+    font-weight: 400;
+    font: 16px/1.5 'Bai Jamjuree', "Segoe UI", Roboto, Helvetica, Arial, sans-serif
 }
 
 body::after {
@@ -490,6 +487,10 @@ strong {
     font-weight: 700
 }
 
+a strong {
+    color: #267CB9;
+}
+
 header ul li+li+li {
     border-right: none;
     width: 89px
@@ -502,7 +503,7 @@ header ul a strong {
 }
 
 section {
-    width: 550px;
+    width: 580px;
     float: right;
     padding-bottom: 50px
 }
@@ -537,10 +538,6 @@ table.image td {
     text-align: center
 }
 
-body {
-    color: #323232
-}
-
 a.prev {
     float: left
 }
@@ -557,39 +554,28 @@ a.next:after {
     content: " >"
 }
 
-.c {
-    text-align: center;
-}
-
-.l {
-    text-align: left;
-}
-
-.r {
-    text-align: right;
-}
-
-#list-post > h2 {
-    font-style: italic
-}
-
-#list-post > ul {
+.list-post > ul {
     font-size: 18px;
     padding-left: 25px
 }
 
-#list-post ul > p {
+.list-post ul > p {
     margin-bottom: 5px
 }
 
-#list-post ul p > i {
+.list-post ul p > i {
+    float: right;
     font-size: 14px;
     opacity: 0.75;
     margin-right: 15px
 }
 
-#list-post ul p > a {
+.list-post ul p > a {
     font-weight: 600;
+}
+
+.list-post br {
+    display: none;
 }
 
 #post-title {
@@ -600,8 +586,14 @@ a.next:after {
     font-style: italic;
 }
 
-#post-content {
+.post-content {
     position: relative;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+    padding-top: 10px;
 }
 
 .codehilite {
@@ -686,13 +678,25 @@ pre {
   color: #595959;
 }
 
+.c {
+    text-align: center;
+}
+
+.l {
+    text-align: left;
+}
+
+.r {
+    text-align: right;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--text-back); 
+    background: #eee; 
 }
 
 ::-webkit-scrollbar-thumb {
@@ -721,6 +725,9 @@ pre {
     .source-file {
         display: none;
     }
+    #post-title br {
+        display: none;
+    }
 }
 
 @media print,
@@ -734,7 +741,7 @@ screen and (max-width: 960px) {
     footer {
         float: none;
         position: static;
-        width: auto
+        width: auto;
     }
     header, footer {
         padding-right: 240px
@@ -743,7 +750,7 @@ screen and (max-width: 960px) {
         border: 1px solid #e5e5e5;
         border-width: 1px 0;
         padding: 20px 0;
-        margin: 0 0 20px
+        margin: 0 0 20px;
     }
     header a small {
         display: inline
@@ -751,7 +758,11 @@ screen and (max-width: 960px) {
     header ul {
         position: absolute;
         right: 50px;
-        top: 52px
+        top: 52px;
+    }
+    img {
+        width: 90%;
+        height: 90%;
     }
 }
 
@@ -787,13 +798,5 @@ screen and (max-width: 480px) {
     header li,
     header ul li+li+li {
         width: 33%
-    }
-}
-
-@media print {
-    body {
-        padding: 0.4in;
-        font-size: 12pt;
-        color: #444
     }
 }
