@@ -171,7 +171,7 @@ enable_swagger: true
 
 Khởi động trình duyệt trong chế độ **insecure** (không an toàn), đối với trình duyệt nhân **Chromium** có thể chạy với các flag (cờ) sau:
 ```bash
-chrome --disable-web-security --ignore-certificate-errors
+chrome --ignore-certificate-errors --disable-web-security --user-data-dir="./"
 ```
 - Mục đích của việc này là tránh bị dính [Cross-Origin Read Blocking](https://stackoverflow.com/questions/50873764/cross-origin-read-blocking-corb) khi request vào trang _không chính chủ_.
 - Phải tắt hết các tab của trình duyệt trước, nếu điều này làm phiền bạn thì có thể tải bản build sẵn của trình duyệt Chromium [tại đây](https://download-chromium.appspot.com/).
