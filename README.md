@@ -1,28 +1,28 @@
 ## blog
 
 ### features
-- For personal blog or document
-- Fast and lightweight
+- For personal blog or documentation
 - Static, fully frontend
-- Supports markdown content 
+- Fast and lightweight
+- Markdown supported
 
-### news
-![](https://i.imgur.com/cj1hPey.png)
+### deps
+- [showdown.js](http://showdownjs.com/) - building markdown contents
+- [highlight.js](https://highlightjs.org/) - code highlighting
 
-````md
-```c
->main.c                             # file name     (one start with '>')
-<in {main}()                        # comment       (lines start with '<')
-[int main() {                       # before        (lines start with '[')
-    printf("Hello, world!\n");      # new insert
-    return 0;
-]}                                  # after         (lines start with ']')
+### dev
+
+Clone this repo:
+```bash
+$ git clone https://github.com/nomi-san/blog.git
 ```
-````
 
-### used
-- [showdown.js](http://showdownjs.com/) :: building markdown contents
-- [highlight.js](https://highlightjs.org/) :: code highlighting
+Serve the repo directory:
+```repo
+$ npm i live-server
+$ cd blog
+$ live-server --port=3000
+```
 
 ### directory
 ```
@@ -46,32 +46,28 @@
 ### script
 
 ```js
-var posts = [
-    [2017, [
-        ["May 04", "The First post", "post-1"],
-        ["Nov 11", "The Second post", "post-2"]
-    ]],
-    [2018, [
-        ["Jan 07", "The Third post", "post-3"],
-    ]]
-];
-
-window.onload = function() {
-    // parse + show post's content
+const posts = {
+    2017: [{
+            date:  '04 thg 05',
+            title: 'The First post',
+            link:  'the-first-post'
+        }, ...
+    ]
 };
 ```
 
-### post's content
+### post
 
 ```html
 <html>
     <tags ...
+    <media-tag ...
     ...
 </html>
 
 <!--content>
 ...
-markdown contents
+your markdown code
 ...
 </content-->
 ```
