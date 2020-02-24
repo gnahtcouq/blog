@@ -554,20 +554,26 @@ a.next:after {
     content: " >"
 }
 
+.list-post h2 {
+    font-size: 18px;
+}
+
 .list-post > ul {
     font-size: 18px;
-    padding-left: 25px
+    padding-left: 25px;
 }
 
 .list-post ul > p {
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    font-size: 20px;
 }
 
 .list-post ul p > i {
     float: right;
     font-size: 14px;
     opacity: 0.75;
-    margin-right: 15px
+    margin-right: 15px;
+    margin-top: 5px;
 }
 
 .list-post ul p > a {

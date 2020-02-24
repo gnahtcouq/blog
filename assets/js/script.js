@@ -10,7 +10,7 @@ const navs = [
 
 const posts = {
     2017: [{
-            date:  '4 thg 5',
+            date:  '04 thg 05',
             title: 'The First post',
             link:  'the-first-post'
         }, {
@@ -19,12 +19,12 @@ const posts = {
             link:  'rust-messagebox'
         }],
     2018: [{
-            date:  '1 thg 7',
+            date:  '01 thg 07',
             title: '\'Chơi\' Lua trong 30 phút!',
             link:  'lua-in-30min'
         }],
     2020: [{
-            date:  '23 thg 2',
+            date:  '23 thg 02',
             title: 'Pick-lock tướng <br>tốc độ bàn thờ',
             link:  'super-fast-pick-lock'
         }]
