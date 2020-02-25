@@ -357,7 +357,12 @@ Bạn có thể theo dõi và cập nhật code tại repo này
 Cũng trong repo này, có thêm vài thứ có thể giúp ích cho bạn
 - **yasuoit** - viết bằng **AutoIt**, có chức năng tương tự như trong bài viết.
 - **yasharp** - viết bằng **C#**, chức năng tương tự luôn, nhưng mà tương tác qua **khung chat** đấy, sử dụng websocket để bắt sự kiện từ LCU.
-- Nếu bạn muốn bắt sự kiện LCU bằng **node.js**, hãy xem qua [gist này](https://gist.github.com/Pupix/eb662b1b784bb704a1390643738a8c15).
+
+Trong **node.js**:
+- Gửi request (nên dùng **request-promise**), có 2 cách:
+    - Nạp credentials trực tiếp vào uri: `https://riot:PASS@127.0.0.1:PORT/...`
+    - Hoặc nạp thông qua header: `{'Authorization': 'Basic ' + btoa("riot:" + PASS)}`
+- Nếu bạn muốn bắt sự kiện LCU, hãy xem qua [gist này](https://gist.github.com/Pupix/eb662b1b784bb704a1390643738a8c15).
 
 Ngoài ra mình còn tìm được vài thứ:
 - [Mimic](https://github.com/molenzwiebel/Mimic) - một app giúp điều khiển **League Client** qua LAN, dùng **C#** để viết cổng truyền tải dữ liệu bằng **websocket**, giao diện thì viết bằng **Vuejs**.
