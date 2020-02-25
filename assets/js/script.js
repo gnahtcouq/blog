@@ -26,7 +26,7 @@ const posts = {
         }],
     2020: [{
             date:  '23 thg 02',
-            title: 'Pick-lock tướng <br>tốc độ bàn thờ',
+            title: 'Pick-lock tướng <br>tốc độ bàn thờ!',
             link:  'super-fast-pick-lock'
         }]
 };

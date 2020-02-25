@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     
-    <title>Pick-lock tướng tốc độ bàn thờ</title>
-    <meta property="og:title" content="Pick-lock tướng tốc độ bàn thờ"/>
+    <title>Pick-lock tướng tốc độ bàn thờ!</title>
+    <meta property="og:title" content="Pick-lock tướng tốc độ bàn thờ!"/>
     <meta property="og:description" content="Cùng khám phá kiến trúc và cách sử dụng API trong League Client."/>
     <meta property="og:url" content="https://nomisan.dev/posts/super-fast-pick-lock/"/>
     <meta property="og:image" content="https://i.ytimg.com/vi/GHnoNzH3g2M/maxresdefault.jpg"/>
@@ -122,8 +122,8 @@ Tại đây, bạn sẽ thấy có một file tên là **lockfile**, mở nó s�
 LeagueClient:01234:56789:abcdef123456ABCDEF123456:https
 ```
 - Xem dấu hai chấm như là điểm ngăn cách, ta sẽ được 5 phần (từ trái qua).
-- Phần thứ ba chính là port (cổng của kết nối).
-- Phần thứ tư là pass (mật khẩu xác thực).
+- Phần thứ ba chính là **port** (cổng của kết nối).
+- Phần thứ tư là remoting auth, mình sẽ gọi là **pass** (mật khẩu xác thực).
 - Về giao thức kết nối thì mặc định là **HTTPS** luôn.
 
 #### Nếu việc tìm thư mục quá rắc rối đối với bạn, hãy thử dùng lệnh.
@@ -140,10 +140,14 @@ Kết quả nhận được sẽ là các tham số truyền vào khi **LeagueCl
 ```
 "--remoting-auth-token=abcdef123456ABCDEF123456" "--app-port=56789"
 ```
-Tại sao có thể dùng cách này, mặc dù pass không giống như trong **lockfile**?
-> À, LeagueClientUx là tệp thực thi độc lập, không có cách nào khác để truyền **dữ liệu động** vào nó ngoài việc truyền qua tham số khi thực thi. Pass khác nhưng vẫn dùng được, một bản sao, hay key phụ chẳng hạn.
+Tại sao có thể dùng cách này?
+> À, LeagueClientUx là tệp thực thi độc lập, không có cách nào khác để truyền **dữ liệu động** vào nó ngoài việc truyền qua tham số khi thực thi.
+
+> Process **LeagueClient** là phần chính của client (chỉ chạy nền), nó sinh ra auth; còn **LeagueClientUx** mới là giao diện, thằng này nạp auth thông qua tham số để xác thực.
 
 Vậy theo ví dụ trên, ta có đường dẫn sau: `https://127.0.0.1:56789`
+
+> Nên nhớ, mỗi lần mở League Client thì pass và port sẽ thay đổi.
 
 ### Trình duyệt web để làm gì?
 
@@ -163,14 +167,19 @@ Tại đây có 2 lựa chọn cho bạn, nhưng mình khuyến khích nên dùn
 Ngoài ra, bạn có thể truy cập trang [lcu.vivide.re](http://lcu.vivide.re/) để xem **API** được trích xuất sẵn (tuy là từ **v8.24** nhưng vẫn còn dùng được).
 
 #### Cách 2 - tốn cơm nhưng hiệu quả
-Tắt client đang chạy, truy cập thư mục chứa **LCU**, mở file có tên **system.yaml** và thêm dòng sau rồi lưu lại, sau đó thì mở client:
+Tắt client đang chạy, truy cập thư mục chứa **LCU**, mở file có tên **system.yaml** và thêm dòng sau:
 ```yaml
+> system.yaml
+< thêm dòng này vào cuối file
+[        voice_url: https://...
 enable_swagger: true
 ```
 > Chỗ này thực sự khó hiểu, đến tận tay game thủ mà vẫn giữ option đó 🤣
 
-Khởi động trình duyệt trong chế độ **insecure** (không an toàn), đối với trình duyệt nhân **Chromium** có thể chạy với các flag (cờ) sau:
+Khởi động League Client lên. Sau đó là khởi động trình duyệt trong chế độ **insecure** (không an toàn), đối với trình duyệt nhân **Chromium** có thể chạy với các flag (cờ) sau:
 ```bash
+> terminal
+< Trên {Windows} thì dùng {cmd} dưới quyền admin.
 chrome --ignore-certificate-errors --disable-web-security --user-data-dir="./"
 ```
 - Mục đích của việc này là tránh bị dính [Cross-Origin Read Blocking](https://stackoverflow.com/questions/50873764/cross-origin-read-blocking-corb) khi request vào trang _không chính chủ_.
@@ -338,6 +347,8 @@ var start = (championIds = [157]) => {
 
 Chỉ cần gọi hàm `start` và truyền vào một mảng ID của tướng:
 ```js
+> console
+[
 start([157, 10, 1]);
 ```
 - **Yasuo**, **Kayle** và **Annie**, hãy đảm bảo rằng bạn có thể chọn được ít nhất 1 trong 3 tướng này.
@@ -360,11 +371,30 @@ Cũng trong repo này, có thêm vài thứ có thể giúp ích cho bạn
 
 Trong **node.js**:
 - Gửi request (nên dùng **request-promise**), có 2 cách:
-    - Nạp credentials trực tiếp vào uri: `https://riot:PASS@127.0.0.1:PORT/...`
-    - Hoặc nạp thông qua header: `{'Authorization': 'Basic ' + btoa("riot:" + PASS)}`
-- Nếu bạn muốn bắt sự kiện LCU, hãy xem qua [gist này](https://gist.github.com/Pupix/eb662b1b784bb704a1390643738a8c15).
+    - Nạp credentials trực tiếp vào uri:<br>`https://riot:PASS@127.0.0.1:PORT/...`
+    - Hoặc nạp thông qua header:<br>`{'Authorization': 'Basic ' + btoa('riot:' + PASS)}`
+- Nếu bạn muốn bắt sự kiện LCU, hãy xem qua [gist này](https://gist.github.com/Pupix/eb662b1b784bb704a1390643738a8c15) (chỗ comment của mình ngắn hơn).
+    ```js
+    > index.js
+    const WebSocket = require('ws');
+    // Vô hiệu hóa xác thực TLS.
+    process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
-Ngoài ra mình còn tìm được vài thứ:
+    // Kết nối vào websocket ngầm của LCU, protocol là WAMP.
+    const ws = new WebSocket('wss://riot:PASS@127.0.0.1:PORT/', 'wamp');
+
+    // Đăng ký topic OnJsonApiEvent.
+    ws.on('open', () => {
+        ws.send('[5, "OnJsonApiEvent"]');
+    });
+
+    // Nhận message chỉ khi League Client (UI) gửi request.
+    ws.on('message', (msg) => {
+        console.log(msg); // gồm JSON, uri và event name.
+    });
+    ```
+
+Ngoài ra mình còn vài thứ khác:
 - [Mimic](https://github.com/molenzwiebel/Mimic) - một app giúp điều khiển **League Client** qua LAN, dùng **C#** để viết cổng truyền tải dữ liệu bằng **websocket**, giao diện thì viết bằng **Vuejs**.
 - [Deceive](https://github.com/molenzwiebel/Deceive) - giúp bạn offline (ẩn đi) sau khi đăng nhập.
 
@@ -383,7 +413,7 @@ Ngoài ra mình còn tìm được vài thứ:
 > Chắc bạn dùng Windows 7 quá cũ rồi, thử cài thêm [cái này](http://www.catalog.update.microsoft.com/search.aspx?q=kb3140245) và [cái này nữa](http://download.microsoft.com/download/0/6/5/0658B1A7-6D2E-474F-BC2C-D69E5B9E9A68/MicrosoftEasyFix51044.msi).
 
 #### Garena khởi động LMHT như thế nào?
-> Vẫn là truyền tham số vào LeagueClient.exe thôi, thử xem các tham số của LeagueClient bằng lệnh trong phần **Tìm cổng kết nối đến LCU**. Bạn sẽ có thấy một đoạn **token** của Garena sinh ra, hạn dùng của nó là 3p sau khi tắt League Client.
+> Vẫn là truyền tham số vào LeagueClient.exe thôi, thử xem các tham số của LeagueClient bằng lệnh trong mục [Tìm cổng kết nối đến LCU](#tìm-cổng-kết-nối-đến-lcu). Bạn sẽ có thấy một đoạn **token** của Garena sinh ra, hạn dùng của nó là 3p sau khi tắt League Client.
 
 #### Có thể custom pass và port của LCU không?
 > Không thành vấn đề, thêm 2 tham số này vào khi thực thi **LeagueClient** (đối với máy chủ **Garena** thì copy tham số lấy được từ câu hỏi ở trên):<br>`--remoting-auth-token=abcdef123456fedcba654321 --app-port=1234`
@@ -394,4 +424,7 @@ Ngoài ra mình còn tìm được vài thứ:
 #### Giống như câu hỏi trên, nhưng mục đích dành cho quản lý quán net?
 > Được, bạn muốn xem thông tin của người chơi ư?
 
+---
+
+Đến đây là hết rồi, mua 01 &#9749; để có những bài viết hay hơn nhé &#128517;
 <content-->
