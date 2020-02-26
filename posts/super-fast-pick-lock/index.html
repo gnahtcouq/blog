@@ -400,23 +400,32 @@ Ngoài ra mình còn vài thứ khác:
 
 ## FAQ
 
+### # Về việc pick-lock tướng
+
 #### Tỉ lệ thành công là bao nhiêu?
 > 100%, nếu mất kết nối thì là 0%.
 
 #### Có bị khóa tài khoản không?
-> Không, đây đơn thuần chỉ là _"mượn tay mượn chân"_ của client thôi.
+> **Không**, đây đơn thuần chỉ là _"mượn tay mượn chân"_ của client thôi (do ta dùng API một cách hợp pháp).
 
-#### Tôi có thể làm gì sau khi đọc bài viết này?
-> Nếu bạn thực sự hiểu được ẩn ý trong đây thì không cần phải xem câu hỏi này. Đơn giản là viết được "**tool**".
+> Nhưng trong tương lai khác nhé! Bạn có nghe về một số tool modskin chứ? Không gây hại ai, nhưng do bị lạm dụng quá mức nên bị **Garena** cho vào danh sách đen (phần mềm thứ ba can thiệp vào game) với tội danh mà ai cũng cho là vô lý - "**cướp miếng cơn manh áo**". Và tool pick-lock trong bài này cũng có thể đi theo vết xe đỗ của modskin.
 
 #### Tại sao một số tool ở cuối bài không hoạt động trên Windows 7?
 > Chắc bạn dùng Windows 7 quá cũ rồi, thử cài thêm [cái này](http://www.catalog.update.microsoft.com/search.aspx?q=kb3140245) và [cái này nữa](http://download.microsoft.com/download/0/6/5/0658B1A7-6D2E-474F-BC2C-D69E5B9E9A68/MicrosoftEasyFix51044.msi).
 
+### # Vấn đề khác
+
+#### Tôi có thể làm gì sau khi đọc bài viết này?
+> Nếu bạn thực sự hiểu được ẩn ý trong đây thì không cần phải xem câu hỏi này. Đơn giản là viết được "**tool**".
+
 #### Garena khởi động LMHT như thế nào?
-> Vẫn là truyền tham số vào LeagueClient.exe thôi, thử xem các tham số của LeagueClient bằng lệnh trong mục [Tìm cổng kết nối đến LCU](#tìm-cổng-kết-nối-đến-lcu). Bạn sẽ có thấy một đoạn **token** của Garena sinh ra, hạn dùng của nó là 3p sau khi tắt League Client.
+> Vẫn là truyền tham số vào **LeagueClient.exe**, thử xem các tham số của nó bằng lệnh trong mục [Tìm cổng kết nối đến LCU](#tìm-cổng-kết-nối-đến-lcu). Bạn sẽ có thấy một đoạn **token** của Garena sinh ra, hạn dùng của nó là 3p sau khi tắt League Client.
 
 #### Có thể custom pass và port của LCU không?
 > Không thành vấn đề, thêm 2 tham số này vào khi thực thi **LeagueClient** (đối với máy chủ **Garena** thì copy tham số lấy được từ câu hỏi ở trên):<br>`--remoting-auth-token=abcdef123456fedcba654321 --app-port=1234`
+
+#### Làm sao để chạy nhiều League Client cùng lúc?
+> Thêm tham số `--allow-multiple-clients` khi thực thi **LeagueClient**.
 
 #### Tôi có thể đóng hết tất cả League Client của một quán net không?
 > Có thể, nếu bạn truy cập được máy chủ và tìm được IP cục bộ của các máy tính cùng port của League Client đang chạy. Sau đó chỉ cần một thiết bị có thể truy cập mạng của quán net và gửi POST request:<br> `https://riot:PASS@LAN_IP:PORT/process-control/v1/process/quit`
