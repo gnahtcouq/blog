@@ -394,7 +394,7 @@ Trong **node.js**:
     });
     ```
 
-Ngoài ra mình còn vài thứ khác:
+Ngoài ra còn vài thứ khác:
 - [Mimic](https://github.com/molenzwiebel/Mimic) - một app giúp điều khiển **League Client** qua LAN, dùng **C#** để viết cổng truyền tải dữ liệu bằng **websocket**, giao diện thì viết bằng **Vuejs**.
 - [Deceive](https://github.com/molenzwiebel/Deceive) - giúp bạn offline (ẩn đi) sau khi đăng nhập.
 
@@ -412,6 +412,11 @@ Ngoài ra mình còn vài thứ khác:
 
 #### Tại sao một số tool ở cuối bài không hoạt động trên Windows 7?
 > Chắc bạn dùng Windows 7 quá cũ rồi, thử cài thêm [cái này](http://www.catalog.update.microsoft.com/search.aspx?q=kb3140245) và [cái này nữa](http://download.microsoft.com/download/0/6/5/0658B1A7-6D2E-474F-BC2C-D69E5B9E9A68/MicrosoftEasyFix51044.msi).
+
+#### Đồng đội cùng sử dụng pick-lock này thì sẽ như thế nào?
+> Do sử dụng API thông qua request đến LCU server nên sẽ phục thuộc vào đường truyền mạng.
+
+> Trong phần hướng dẫn trên, mình đặt độ trễ là 250ms, bạn có thể thay đổi. Đối với 2 tool đã nói ở trên, thì **yasharp** sẽ có độ trễ nhỏ hơn **yasuoit** do sử dụng callback (từ LCU websocket) thay vì dùng vòng lặp để kiểm tra (xem mã nguồn sẽ rõ).
 
 ### # Vấn đề khác
 
