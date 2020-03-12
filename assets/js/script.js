@@ -6,7 +6,7 @@ const navs = [
     {'home': '/'},
     {'about':'/about'},
     {'/me': 'https://github.com/nomi-san/'},
-    {'@me': 'mailto:wuuyi123@gmail.com'}
+    {'@me': 'mailto:admin@nomisan.dev'}
 ];
 
 const posts = {
