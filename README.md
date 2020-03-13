@@ -2,11 +2,12 @@
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L6W74V)
 
-### features
-- For personal blog or documentation
-- Static, fully frontend
+### about
+- For building personal blog/documentation
 - Fast and lightweight
+- Static, fully frontend
 - Markdown supported
+- No **jQuery**
 
 ### deps
 - [showdown.js](http://showdownjs.com/) - building markdown contents
@@ -26,7 +27,7 @@ $ cd blog
 $ live-server --port=3000
 ```
 
-### directory
+### dir
 ```
 ./blog/
     |____assets/                    # static assets
@@ -35,11 +36,10 @@ $ live-server --port=3000
     .    |____img/...
     .    |____js/
     .    .    |____script.js        # main script
-    .    ...
-    |____posts/                     # list posts
-    .    |____post-1/index.html     # post-1
-    .    |____post-2/index.html     # post-2
-    .    ...
+    |____posts/                     # post list
+    .    |____post-path/            # path
+    .    .    |____index.html       # index
+    .    .    |____content.md       # content
     |____about/index.html           # about
     |____index.html                 # home
     ...
@@ -60,16 +60,17 @@ const posts = {
 
 ### post
 
+- **index.html**
 ```html
 <html>
     <tags ...
     <media-tag ...
     ...
 </html>
+```
 
-<!--content>
-...
-your markdown code
-...
-</content-->
+- **content.md**
+```md
+### your content here
+- have a great time
 ```
