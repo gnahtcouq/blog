@@ -1,49 +1,49 @@
-const title = 'Nomi-san';
+const title  = 'Nomi-san';
 const author = 'Nomi';
 const ga_key = 'UA-119524229-1';
 
 const navs = [
-    {'home': '/'},
-    {'about':'/about'},
-    {'/me': 'https://github.com/nomi-san/'},
-    {'@me': 'mailto:admin@nomisan.dev'}
+    {'home'  : '/'},
+    {'about' : '/about'},
+    {'/me'   : 'https://github.com/nomi-san/'},
+    {'@me'   : 'mailto:admin@nomisan.dev'}
 ];
 
 const posts = {
-    2017: [{
-            date:  '04 thg 05',
-            title: 'The First post',
-            link:  'the-first-post'
-        }, {
-            date:  '11 thg 11',
-            title: 'Rust MessageBox',
-            link:  'rust-messagebox'
-        }],
-    2018: [{
-            date:  '01 thg 07',
-            title: '\'Chơi\' Lua trong 30 phút!',
-            link:  'lua-in-30min'
-        }],
-    2020: [{
-            date:  '23 thg 02',
-            title: 'Pick-lock tướng <br>tốc độ bàn thờ!',
-            link:  'super-fast-pick-lock'
-        }]
+[2017]: [{
+        date:  '04 thg 05',
+        title: 'The First post',
+        link:  'the-first-post'
+    }, {
+        date:  '11 thg 11',
+        title: 'Hộp thoại Rust',
+        link:  'rust-messagebox'
+    }],
+[2018]: [{
+        date:  '01 thg 07',
+        title: '\'Chơi\' Lua trong 30 phút!',
+        link:  'lua-in-30min'
+    }],
+[2020]: [{
+        date:  '23 thg 02',
+        title: 'Pick-lock tướng <br>tốc độ bàn thờ!',
+        link:  'super-fast-pick-lock'
+    }]
 };
 
-document.addEventListener('DOMContentLoaded', function()
-{
+document.addEventListener('DOMContentLoaded', function() {
+
+    const header  = document.querySelector('header');
+    const footer  = document.querySelector('footer');
+    const section = document.querySelector('section');
+
     var snav = '';
     navs.forEach(function(v) {
         var text = Object.keys(v)[0];
         var url = v[text];
         var target = (url.charAt(0) === '/') ? '' : `target="_blank"`;
-        snav +=`<p class="view"><a href="${url}" ${target}>${text}</a></p>\n`;
+        snav +=`<p class="view"><a href="${url}" ${target}>${text}</a></p>`;
     });
-
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const section = document.querySelector('section');
 
     header.innerHTML += `<h1>${title}</h1><nav>` + snav + '</nav>';
     footer.innerHTML += `<p>&#169; ${(new Date).getFullYear()} ${author} &#124; ` +
@@ -52,29 +52,27 @@ document.addEventListener('DOMContentLoaded', function()
         `<img src='https://www.ko-fi.com/img/githubbutton_sm.svg' height='24px'></a></p>`;
 
     const lp = window.location.pathname;
-    if (lp == '/' || lp == '/index.html')
-    {
-        const h1 = create_elm('h1', '', 'posts');
-        const list = create_elm('div', 'list-post');
+    if (lp == '/' || lp == '/index.html') {
+        const h1 = createElm('h1', '', 'posts');
+        const list = createElm('div', 'list-post');
 
         Object.keys(posts).reverse().forEach(function(year) {
             var inner = '';
-            list.innerHTML += gen_elm('h2', null, year);
+            list.innerHTML += genElm('h2', null, year);
             posts[year].reverse().forEach(function(details) {
                 const {date, title, link} = details;
                 inner += `<p><a href="/posts/${link}">${title}</a><i>${date}</i></p>`;
             });
-            list.innerHTML += gen_elm('ul', null, inner);
+            list.innerHTML += genElm('ul', null, inner);
         });
 
         section.appendChild(h1);
         section.appendChild(list);
     }
-    else if (lp.indexOf('/posts/') != -1)
-    {
+    else if (lp.indexOf('/posts/') !== -1) {
         const path = lp.replace('/posts/', '')
             .replace('/index.html', '').replace('/', '');
-        const post = get_post(posts, path);
+        const post = getPost(posts, path);
         header.innerHTML += `<h2 class="post-title">${post.title}</h2>` +
             `<p class="post-date">${post.date}</p>`;
         
@@ -83,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function()
                 return text.replace(/&amp;/g, '&')
                     .replace(/&lt;/g, '<')
                     .replace(/&gt;/g, '>');
-            }
+            };
             return [{
                 type: 'output',
                 filter: function(text, converter, options) {
@@ -92,35 +90,35 @@ document.addEventListener('DOMContentLoaded', function()
                         flags = 'g',
                         replacement = function(wholeMatch, match, left, right) {
                             match = unencode(match);
-                            var g = parse_code(match);
+                            var g = parseCode(match);
                             var code = '', isNew = (g.before || g.after);
                             var lang = left.match(/<pre><code class="(\w+)/);
                             
                             lang = lang ? lang[1] : 'plaintext';
                             
                             if (g.before) {
-                                code += gen_elm('pre', 'insert-before', g.before);
+                                code += genElm('pre', 'insert-before', g.before);
                             }           
                             
                             if (g.comment) {
-                                g.comment = simple_bold(g.comment);
+                                g.comment = simpleBold(g.comment);
                             }
                             
                             if (g.file) {
-                                g.file = gen_elm('em', null, g.file);
-                                code += gen_elm('div', 'source-file',
+                                g.file = genElm('em', null, g.file);
+                                code += genElm('div', 'source-file',
                                     g.file + (g.comment ? '<br>' + g.comment : ''));
                             }
                             
-                            code += gen_elm('pre',
+                            code += genElm('pre',
                                 isNew ? 'insert' : 'fully', hljs.highlight(lang, g.code).value);
                             
                             if (g.after) {
-                                code += gen_elm('pre', 'insert-after', g.after);
+                                code += genElm('pre', 'insert-after', g.after);
                             }
                             
-                            return gen_elm('div', 'codehilite', code) +
-                                (g.file ? gen_elm('div', 'source-file-narrow',
+                            return genElm('div', 'codehilite', code) +
+                                (g.file ? genElm('div', 'source-file-narrow',
                                     g.file + (g.comment ? ', ' + g.comment : '')) : '');
                         };
                     return showdown.helper
@@ -129,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function()
             }];
         });
 
-        const toc = create_elm('div', 'post-toc');
+        const toc = createElm('div', 'post-toc');
 
         showdown.extension('t.o.c', function() {
             return [{
@@ -152,16 +150,14 @@ document.addEventListener('DOMContentLoaded', function()
         
         showdown.setFlavor('github');
         var converter = new showdown
-            .Converter({ openLinksInNewWindow: true, extensions: ['code.hl', 't.o.c']});
-        
-        var html = read_file((window.location.href)
-            .replace('/index.html', '') + '/index.html');
-        var content = get_content(html);
+            .Converter({ openLinksInNewWindow: true, extensions: ['code.hl', 't.o.c']});       
+        var content = readFile((window.location.href)
+            .replace('/index.html', '') + '/content.md');
         section.className = 'post-content';
         section.innerHTML = converter.makeHtml(content);
     }
     
-    fix_scale(document);
+    fixScale(document);
     
     // GA track
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -172,24 +168,24 @@ document.addEventListener('DOMContentLoaded', function()
     ga('send', 'pageview');
 });
 
-function create_elm(tag = '', klass = '', inner = '') {
+function createElm(tag = '', klass = '', inner = '') {
     const elm = document.createElement(tag);
     elm.className = klass;
     elm.innerHTML = inner;
     return elm;
 }
 
-function gen_elm(tag, klass, inner) {
+function genElm(tag, klass, inner) {
     return `<${tag} ${klass ?
         `class="${klass}"` : ''}>${inner}</${tag}>`;
 }
 
-function simple_bold(s) {
+function simpleBold(s) {
     return s.replace(/{/g, '<em>')
         .replace(/}/g, '</em>');
 }
 
-function get_post(posts, path) {
+function getPost(posts, path) {
     for (var k in posts) {
         var l = posts[k];
         for (var i = 0; i < l.length; i++)
@@ -198,12 +194,7 @@ function get_post(posts, path) {
     }
 }
 
-function get_content(s) {
-    return s.split('<!--content>').pop()
-        .split('</content-->').shift();
-}
-
-function read_file(file) {
+function readFile(file) {
     var allText = '', rawFile = new XMLHttpRequest();
     rawFile.open('GET', file, false);
     rawFile.onreadystatechange = function() {
@@ -215,12 +206,12 @@ function read_file(file) {
     return allText;
 }
 
-function parse_code(s) {
+function parseCode(s) {
     var s = s.trim().split('\n');
     var file, comment = '', before = '',
         after = '', code = '';
 
-    s.forEach((i) => {
+    s.forEach(function(i) {
         if (i.indexOf('>') === 0)
             file = i.substr(1).trim();
         else if (i.indexOf('<') === 0)
@@ -242,7 +233,7 @@ function parse_code(s) {
     };
 }
 
-function fix_scale(document) {
+function fixScale(document) {
     var metas = document.getElementsByTagName('meta'),
         changeViewportContent = function(content) {
             for (var i = 0; i < metas.length; i++) {

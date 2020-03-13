@@ -594,6 +594,7 @@ a.next:after {
 
 .post-toc p {
     margin: 0;
+    font-size: 13px;
 }
 
 .post-content {
