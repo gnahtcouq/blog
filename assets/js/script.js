@@ -151,10 +151,19 @@ document.addEventListener('DOMContentLoaded', function() {
         showdown.setFlavor('github');
         var converter = new showdown
             .Converter({ openLinksInNewWindow: true, extensions: ['code.hl', 't.o.c']});       
-        var content = readFile((window.location.href)
+        var content = readFile((window.location.pathname)
             .replace('/index.html', '') + '/content.md');
         section.className = 'post-content';
         section.innerHTML = converter.makeHtml(content);
+
+        setTimeout(function() {
+            var href = window.location.href;
+            var permapos = href.indexOf('#');
+            if (permapos !== -1) {
+                var id = document.getElementById(decodeURI(href.substr(permapos + 1)));
+                if (id !== null) id.scrollIntoView({behavior: 'smooth'});
+            }
+        }, 500);
     }
     
     fixScale(document);
