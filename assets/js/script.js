@@ -164,6 +164,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (id !== null) id.scrollIntoView({behavior: 'smooth'});
             }
         }, 500);
+
+        var s2t = createElm('button', 'scroll-top', arrowSvg());
+        
+        s2t.onclick = function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        };
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 ||
+                document.documentElement.scrollTop > 100) {
+                s2t.style.display = "block";
+            } else {
+                s2t.style.display = "none";
+            }
+        };
+
+        section.appendChild(s2t);
     }
     
     fixScale(document);
@@ -240,6 +258,15 @@ function parseCode(s) {
         after: after != '' ? after : null,
         code: code
     };
+}
+
+function arrowSvg() {
+    return `<svg fill="#8590a6"
+        viewBox="0 0 24 24" width="24" height="24">
+        <path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996
+        0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33
+        4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58
+        1.415h-3.004v7.005z"/></svg>`;
 }
 
 function fixScale(document) {

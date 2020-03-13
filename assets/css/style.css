@@ -381,6 +381,11 @@ blockquote {
     font-style: italic
 }
 
+button {
+    border: none;
+    outline: none;
+}
+
 code,
 pre {
     font-family: Monaco, Liberation Mono, monospace;
@@ -393,7 +398,7 @@ p code,
 table td code,
 li code {
 	color: #0009;
-    background: rgba(68, 68, 102, 0.1);
+    background: #4444661a;
     padding: 1px 5px;
     border-radius: 2px;
     word-wrap: break-word;
@@ -695,6 +700,32 @@ pre {
 
 .r {
     text-align: right;
+}
+
+.scroll-top {
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px; 
+    z-index: 9999;
+    box-shadow: 0 1px 3px #1a1a1a1a;
+    text-align: center;
+    padding: 0;
+    line-height: inherit;
+}
+
+.scroll-top svg {
+    width: 24;
+    height: 24;
+    margin-top: 3px;
+}
+
+.scroll-top:hover {
+    background: #ccc5;
 }
 
 ::-webkit-scrollbar {
