@@ -283,23 +283,15 @@
 }
 
 body {
+    margin: 0;
     padding: 50px;
+    display: block;
     color: #000;
     font-weight: 400;
-    font: 16px/1.5 'Bai Jamjuree', "Segoe UI", Roboto, Helvetica, Arial, sans-serif
-}
-
-body::after {
-    content: "";
-    background-image: url('https://www.transparenttextures.com/patterns/light-wool.png');
+    font: 16px/1.5 'Bai Jamjuree', "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #fff;
-    opacity: 0.75;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1; 
+    background-image: url('/assets/img/light-wool.png');   
+    background-attachment: scroll;
 }
 
 nav {
